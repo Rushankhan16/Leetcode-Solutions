@@ -11,13 +11,14 @@ public:
     ListNode *detectCycle(ListNode *head) {
         if(head==NULL || head->next==NULL) return NULL;
 
-        unordered_set<ListNode*>visited;
-        while(head!=NULL){
-            if(visited.count(head)){
-                return head;
+        map<ListNode*, int>mpp;
+        ListNode* temp=head;
+        while(temp!=NULL){
+            if(mpp.find(temp)!=mpp.end()){
+                return temp;
             }
-            visited.insert(head);
-            head=head->next;
+            mpp[temp]=1;
+            temp=temp->next;
         }
         return NULL;
     }
