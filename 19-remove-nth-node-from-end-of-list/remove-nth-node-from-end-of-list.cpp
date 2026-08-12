@@ -39,9 +39,6 @@ public:
         temp->next=temp->next->next;
         delete delNode;
         
-
-       
-    
         return head;
     }
 };
