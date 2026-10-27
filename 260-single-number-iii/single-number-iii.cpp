@@ -1,16 +1,22 @@
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
-        vector<int>ans;
-        map<int,int>mpp;
+        long long xorr=0;
         for(int i=0; i<nums.size(); i++){
-            mpp[nums[i]]++;
+            xorr=xorr^nums[i];
         }
-        for(auto it : mpp){
-            if(it.second==1){
-                ans.push_back(it.first);
+        long long rightmost = xorr & (-xorr);
+
+        int b1=0,b2=0;
+
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] & rightmost){
+                b1=b1^nums[i];
+            }
+            else{
+                b2=b2^nums[i];
             }
         }
-        return ans;
+        return {b1,b2};
     }
 };
