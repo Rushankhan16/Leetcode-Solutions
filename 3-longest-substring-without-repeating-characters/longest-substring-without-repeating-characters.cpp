@@ -3,16 +3,17 @@ public:
     int lengthOfLongestSubstring(string s) {
         int n=s.length();
         int maxlen=0;
-        
-        for(int i=0; i<n; i++){
-            int freq[256]={0};
-            for(int j=i; j<n; j++){
-                if(freq[s[j]]>0) break;
-                freq[s[j]]++;
-                int len=j-i+1;
-                maxlen=max(maxlen,len);
-                
+        int l=0;
+        int freq[256]={0};
+        for(int r=0; r<n; r++){
+            freq[s[r]]++;
+           
+            while(freq[s[r]]>1){
+                freq[s[l]]--;
+                l++;
             }
+             int len=r-l+1;
+            maxlen=max(maxlen,len);
         }
         return maxlen;
     }
